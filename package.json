@@ -1,0 +1,49 @@
+{
+  "name": "@zhangry/ant",
+  "version": "1.0.0",
+  "description": "React组件的企业级UI设计",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://registry.npmjs.org"
+  },
+  "homepage": "https://zhangrenyang.github.io/ant",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangrenyang/ant.git"
+  },
+  "keywords": [
+    "ant",
+    "component",
+    "components",
+    "design",
+    "framework",
+    "frontend",
+    "react",
+    "react-component",
+    "ui"
+  ],
+  "author": "zhangrenyang",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/plugin-transform-typescript": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "autoprefixer": "^10.3.4",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.2.0",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
+    "mini-css-extract-plugin": "^2.3.0",
+    "postcss-loader": "^6.1.1",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.1"
+  }
+}
