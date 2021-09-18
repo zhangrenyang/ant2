@@ -44,7 +44,7 @@ npm init -y
 ## 2.配置webpack
 ### 2.1 安装依赖
 ```js
-yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/plugin-transform-typescript  @babel/plugin-transform-runtime @types/node --dev
+yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/runtime @babel/plugin-transform-typescript  @babel/plugin-transform-runtime @types/node --dev
 
 yarn add react react-dom 
 yarn add @types/react @types/react-dom --dev
@@ -379,8 +379,6 @@ yarn add ant
 
 import { Button } from 'antdesign';
 ReactDOM.render(<Button>按钮</Button>, mountNode);
-
-
 ```
 
 ### 3.5 Components.stories.mdx
@@ -503,5 +501,142 @@ Basic.args = {
 ```
 
 
+## 4.测试
+- [configuration](https://jestjs.io/docs/configuration)
+- [code-transformation](https://jestjs.io/docs/code-transformation)
 
+### 4.1 安装
+```js
+yarn add jest @types/jest  @wojtekmaj/enzyme-adapter-react-17 puppeteer @types/puppeteer jest-environment-puppeteer  @types/jest-environment-puppeteer jest-puppeteer  jest-image-snapshot @types/jest-image-snapshot --dev
+yarn add enzyme  @types/enzyme  --dev
+```
+
+### 4.2 tests\setup.js
+tests\setup.js
+```js
+const React = require('react');
+const Enzyme = require('enzyme');
+
+const Adapter = require('@wojtekmaj/enzyme-adapter-react-17')
+Enzyme.configure({ adapter: new Adapter() });
+```
+
+### 4.3 tests\index.html
+tests\index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazing Antd</title>
+    <style>
+      body {
+        border: 5px solid #1890ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+### 4.4 unit.jest.js
+unit.jest.js
+```js
+module.exports = {
+  verbose: true,
+  testEnvironment: 'jsdom',
+  setupFiles: ['./tests/setup.js'],
+  testMatch: ['**/unit/**/*.(spec|test).(js|ts|jsx|tsx)'],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'components/**/*.(js|ts|jsx|tsx)',
+    '!components/**/*.stories.(js|ts|jsx|tsx)',
+    '!components/**/*.(spec|test).(js|ts|jsx|tsx)',
+  ],
+};
+```
+
+### 4.5 e2e.jest.js
+e2e.jest.js
+```js
+module.exports = {
+  verbose: true,
+  testEnvironment: 'jest-environment-puppeteer',
+  setupFiles: ['./tests/setup.js'],
+  preset: 'jest-puppeteer',
+  testMatch: ['**/e2e/**/*.(spec|test).(j|t)sx'],
+};
+```
+
+### 4.6 unit\index.test.tsx
+components\button\unit\index.test.tsx
+```js
+import React from 'react';
+import { mount } from 'enzyme';
+import Button from '..';
+
+describe('Button', () => {
+  it('mount correctly', () => {
+    expect(() => mount(<Button>Follow</Button>)).not.toThrow();
+  });
+});
+
+```
+
+### 4.7 snapshot.spec.tsx
+components\button\e2e\snapshot.spec.tsx
+```js
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
+import Button from '..';
+
+const toMatchSnapshot = configureToMatchImageSnapshot({
+  customSnapshotsDir: `${process.cwd()}/snapshots`,
+  customDiffDir: `${process.cwd()}/diffSnapshots`,
+});
+expect.extend({ toMatchSnapshot });
+describe('Button snapshot', () => {
+  it('screenshot should correct', async () => {
+    await jestPuppeteer.resetPage();
+    await page.goto(`file://${process.cwd()}/tests/index.html`);
+    const html = ReactDOMServer.renderToString(<Button>按钮</Button>);
+    await page.evaluate((innerHTML:string) => {
+      document.querySelector('#root')!.innerHTML = innerHTML;
+    }, html);
+    const screenshot = await page.screenshot();
+    expect(screenshot).toMatchSnapshot();
+  });
+});
+```
+
+### 4.8 jest-puppeteer.config.js
+jest-puppeteer.config.js
+```js
+module.exports = {
+  launch: {
+    dumpio: true,
+    headless: process.env.HEADLESS !== 'false',
+  },
+  browserContext: 'default',
+};
+```
+
+### 4.9 package.json
+package.json
+```diff
+{
+  "scripts": {
+    "build": "webpack",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
++   "test:unit": "jest --config unit.jest.js",
++   "test:e2e": "jest --config e2e.jest.js",
++   "test": "npm run test:unit && npm run test:e2e"
+  },
+}
+```
 

@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test:unit": "jest --config unit.jest.js",
+    "test:e2e": "jest --config e2e.jest.js",
+    "test": "npm run test:unit && npm run test:e2e"
   },
   "publishConfig": {
     "access": "public",
@@ -35,6 +38,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "@babel/core": "^7.15.5",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/plugin-transform-typescript": "^7.15.4",
@@ -42,16 +46,27 @@
     "@babel/preset-react": "^7.14.5",
     "@storybook/addon-essentials": "^6.3.8",
     "@storybook/react": "^6.3.8",
+    "@types/enzyme": "^3.10.9",
+    "@types/jest": "^27.0.1",
+    "@types/jest-environment-puppeteer": "^4.4.1",
+    "@types/jest-image-snapshot": "^4.3.1",
     "@types/node": "^16.9.2",
+    "@types/puppeteer": "^5.4.4",
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.3.4",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
+    "enzyme": "^3.11.0",
+    "jest": "^27.2.0",
+    "jest-environment-puppeteer": "^5.0.4",
+    "jest-image-snapshot": "^4.5.1",
+    "jest-puppeteer": "^5.0.4",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
     "mini-css-extract-plugin": "^2.3.0",
     "postcss-loader": "^6.1.1",
+    "puppeteer": "^10.2.0",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1"
