@@ -44,7 +44,7 @@ npm init -y
 ## 2.配置webpack
 ### 2.1 安装依赖
 ```js
-yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/plugin-transform-typescript  @babel/plugin-transform-runtime --dev
+yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/plugin-transform-typescript  @babel/plugin-transform-runtime @types/node --dev
 
 yarn add react react-dom 
 yarn add @types/react @types/react-dom --dev
@@ -304,7 +304,8 @@ export  {Button} from './button';
 ### 2.8 button\index.tsx
 components\button\index.tsx
 ```js
-export {default as Button} from './button';
+import Button from './button';
+export default Button;
 export type { ButtonProps } from './button';
 ```
 
@@ -469,8 +470,30 @@ antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研�
 - ConfigProvider 全局化配置
 ```
 
+### 3.6  button.stories.tsx
+components\button\button.stories.tsx
+```js
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-### 3.6 package.json
+import Button from ".";
+
+export default {
+  title: "通用/Button(按钮)",
+  component: Button,
+} as ComponentMeta<typeof Button>;
+
+const Template: ComponentStory<typeof Button> = (args) => (
+  <Button  {...args} />
+);
+
+export const Basic = Template.bind({});
+Basic.args = {
+  children: "按钮",
+};
+```
+
+### 3.7 package.json
 ```diff
   "scripts": {
     "build": "webpack",
@@ -478,3 +501,7 @@ antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研�
 +   "build-storybook": "build-storybook"
   },
 ```
+
+
+
+
