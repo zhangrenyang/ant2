@@ -322,3 +322,159 @@ const Button: React.FC<ButtonProps> = (props) => {
 export default Button;
 export type { ButtonProps };
 ```
+
+## 3.storybook
+### 3.1 安装
+```js
+yarn add @storybook/react   @storybook/addon-essentials --dev
+```
+
+### 3.2 .storybook\main.js
+.storybook\main.js
+```js
+module.exports = {
+    stories: [
+        "../components/Introduction.stories.mdx",
+        "../components/Install.stories.mdx",
+        "../components/Components.stories.mdx",
+        "../components/**/*.stories.mdx",
+        "../components/**/*.stories.@(js|jsx|ts|tsx)"
+    ],
+    addons: ['@storybook/addon-essentials'],
+};
+```
+
+### 3.3 Introduction.stories.mdx
+components\Introduction.stories.mdx
+```js
+<Meta title="开始/介绍" />
+
+## Ant Design of React
+antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
+```
+
+### 3.4 Install.stories.mdx
+components\Install.stories.mdx
+```js
+<Meta title="开始/安装使用" />
+
+## 安装
+使用 npm 或 yarn 安装
+
+
+npm install ant --save
+
+
+
+yarn add ant
+
+
+## 浏览器引入
+在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 ant
+我们在 npm 发布包内的 antdesign/dist 目录下提供了 ant.js
+
+## 示例
+
+
+import { Button } from 'antdesign';
+ReactDOM.render(<Button>按钮</Button>, mountNode);
+
+
+```
+
+### 3.5 Components.stories.mdx
+components\Components.stories.mdx
+```js
+<Meta title="开始/组件总览" />
+
+## 组件总览
+antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
+
+## 通用
+- Button 按钮
+- Icon 图标
+- Typography 排版
+
+## 布局
+- Divider 分割线
+- Grid 栅格
+- Layout 布局
+- Space 间距
+
+## 导航
+- Affix 固钉
+- Breadcrumb 面包屑
+- Dropdown 下拉菜单
+- Menu 导航菜单
+- Pagination 分页
+- PageHeader 页头
+- Steps 步骤条
+
+## 数据录入
+- AutoComplete 自动完成
+- Checkbox 多选框
+- Cascader 级联选择
+- DatePicker 日期选择框
+- Form 表单
+- InputNumber 数字输入框
+- Input 输入框
+- Mentions 提及
+- Rate 评分
+- Radio 单选框
+- Switch 开关
+- Slider 滑动输入条
+- Select 选择器
+- TreeSelect 树选择
+- Transfer 穿梭框
+- TimePicker 时间选择框
+- Upload 上传
+
+## 数据展示
+- Avatar 头像
+- Badge 徽标数
+- Comment 评论
+- Collapse 折叠面板
+- Carousel 走马灯
+- Card 卡片
+- Calendar 日历
+- Descriptions 描述列表
+- Empty 空状态
+- Image 图片
+- List 列表
+- Popover 气泡卡片
+- Statistic 统计数值
+- Tree 树形控件
+- Tooltip 文字提示
+- Timeline 时间轴
+- Tag 标签
+- Tabs 标签页
+- Table 表格
+
+
+## 反馈
+- Alert 警告提示
+- Drawer 抽屉
+- Modal 对话框
+- Message 全局提示
+- Notification 通知提醒框
+- Progress 进度条
+- Popconfirm 气泡确认框
+- Result 结果
+- Spin 加载中
+- Skeleton 骨架屏
+
+## 其他
+- Anchor 锚点
+- BackTop 回到顶部
+- ConfigProvider 全局化配置
+```
+
+
+### 3.6 package.json
+```diff
+  "scripts": {
+    "build": "webpack",
++   "storybook": "start-storybook -p 6006",
++   "build-storybook": "build-storybook"
+  },
+```
