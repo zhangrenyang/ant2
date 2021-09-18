@@ -45,6 +45,9 @@ npm init -y
 ### 2.1 安装依赖
 ```js
 yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/plugin-transform-typescript  @babel/plugin-transform-runtime --dev
+
+yarn add react react-dom 
+yarn add @types/react @types/react-dom --dev
 ```
 
 ### 2.2 webpack.config.js
@@ -264,6 +267,58 @@ sh.exe.stackdump
 /diffSnapshots
 ```
 
-### 2.5 index.js
+### 2.5 tsconfig.json
+```json
+{
+    "compilerOptions": {
+      "strictNullChecks": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "jsx": "react",
+      "noUnusedParameters": true,
+      "noUnusedLocals": true,
+      "noImplicitAny": true,
+      "target": "es6",
+      "lib": ["dom", "es2017"],
+      "skipLibCheck": true,
+      "types": ["node"]
+    },
+    "exclude": ["node_modules", "lib", "es"]
+}
+```
+
+### 2.6 index.js
 ```js
-````
+module.exports = require('./components');
+```
+
+### 2.7 components\index.tsx
+components\index.tsx
+```js
+export type { ButtonProps } from './button';
+export  {Button} from './button';
+```
+
+### 2.8 button\index.tsx
+components\button\index.tsx
+```js
+export {default as Button} from './button';
+export type { ButtonProps } from './button';
+```
+
+### 2.9 button.tsx
+components\button\button.tsx
+```js
+import React, { ButtonHTMLAttributes } from 'react';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+const Button: React.FC<ButtonProps> = (props) => {
+  const { children } = props;
+  return <button type="button">{children}</button>;
+};
+
+export default Button;
+export type { ButtonProps };
+```
