@@ -3,5 +3,5 @@ module.exports = {
   testEnvironment: 'jest-environment-puppeteer',
   setupFiles: ['./tests/setup.js'],
   preset: 'jest-puppeteer',
-  testMatch: ['**/e2e/**/*.(spec|test).(j|t)sx'],
+  testMatch: ['**/e2e/**/*.(spec|test).(j|t)sx']
 };

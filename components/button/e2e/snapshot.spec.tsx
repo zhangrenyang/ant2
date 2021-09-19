@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { configureToMatchImageSnapshot } from 'jest-image-snapshot';
 import Button from '..';
-
+import 'jest-environment-puppeteer';
 const toMatchSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: `${process.cwd()}/snapshots`,
   customDiffDir: `${process.cwd()}/diffSnapshots`,
