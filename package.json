@@ -1,6 +1,6 @@
 {
   "name": "@zhangry/ant2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React组件的企业级UI设计",
   "main": "lib/index.js",
   "module": "es/index.js",
