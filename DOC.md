@@ -1,3 +1,37 @@
+## 0.AntDesign
+- [ant.design](https://ant.design/docs/react/introduce-cn) 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品
+
+### 0.1 技术栈
+  - 框架 react
+  - 测试 jest+enzyme
+  - 检查 eslint
+  - 打包 webpack+gulp
+  - 文档 bisheng
+  - 钩子 husky
+
+### 0.2 源码目录
+  - .husky git钩子
+  - _site 网站
+  - components 组件
+  - docs 文档
+  - dist 打包生成的文件
+  - es ES6
+  - lib ES5
+  - scripts 脚本
+  - site 组件预览项目
+  - tests 测试
+  - typings 类型定义
+
+### 0.3 课程内容
+- webpack配置
+- storybook文档和组件编写
+- 单元测试+E2E快照测试+代码覆盖率
+- eslint+prettier+editorconfig
+- git hook
+- 编译发布
+- 持续集成
+
+
 ## 1.创建项目
 ### 1.创建文件夹
 ```js
@@ -37,7 +71,70 @@ npm init -y
     "ui"
   ],
   "author": "zhangrenyang",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^4.31.1",
+    "and": "^0.0.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.25.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/plugin-transform-typescript": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@storybook/addon-essentials": "^6.3.8",
+    "@storybook/react": "^6.3.8",
+    "@types/enzyme": "^3.10.9",
+    "@types/jest": "^27.0.1",
+    "@types/jest-environment-puppeteer": "^4.4.1",
+    "@types/jest-image-snapshot": "^4.3.1",
+    "@types/node": "^16.9.2",
+    "@types/puppeteer": "^5.4.4",
+    "@types/react": "^17.0.21",
+    "@types/react-dom": "^17.0.9",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "autoprefixer": "^10.3.4",
+    "babel-loader": "^8.2.2",
+    "commitizen": "^4.2.4",
+    "css-loader": "^6.2.0",
+    "cz-customizable": "^6.3.0",
+    "enzyme": "^3.11.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "jest": "^27.2.0",
+    "jest-environment-puppeteer": "^5.0.4",
+    "jest-image-snapshot": "^4.5.1",
+    "jest-puppeteer": "^5.0.4",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
+    "merge2": "^1.4.1",
+    "mini-css-extract-plugin": "^2.3.0",
+    "postcss-loader": "^6.1.1",
+    "prettier": "^2.4.1",
+    "puppeteer": "^10.2.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.3",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
 }
 ```
 
@@ -327,6 +424,10 @@ export type { ButtonProps };
 ```
 
 ## 3.storybook
+- [storybook](https://storybook.js.org)是一个用于开发UI组件的开源工具，是UI组件的开发环境
+- [@storybook/react](https://www.npmjs.com/package/@storybook/react)是React的运行环境
+- [@storybook/addon-essentials](https://www.npmjs.com/package/@storybook/addon-essentials)是storybook最好插件的合集
+
 ### 3.1 安装
 ```js
 yarn add @storybook/react   @storybook/addon-essentials --dev
@@ -508,6 +609,11 @@ Basic.args = {
 - [code-transformation](https://jestjs.io/docs/code-transformation)
 
 ### 4.1 安装
+- [jest](https://www.jestjs.cn/)是一个令人愉快的 JavaScript 测试框架
+- [Enzyme](https://www.npmjs.com/package/enzyme) 用于 React 的 JS 测试工具
+- [puppeteer](https://www.npmjs.com/package/puppeteer)是一个控制 headless Chrome 的 Node.js API
+- [jest-image-snapshot](https://www.npmjs.com/package/jest-image-snapshot)执行图像比较的Jest匹配器,对于视觉回归测试非常有用
+
 ```js
 yarn add jest @types/jest  @wojtekmaj/enzyme-adapter-react-17 puppeteer @types/puppeteer jest-environment-puppeteer  @types/jest-environment-puppeteer jest-puppeteer  jest-image-snapshot @types/jest-image-snapshot --dev
 yarn add enzyme  @types/enzyme  --dev
@@ -644,6 +750,9 @@ package.json
 ```
 
 ## 5.eslint
+- [eslint](https://eslint.bootcss.com/)是一个插件化并且可配置的 JavaScript 语法规则和代码风格的检查工具
+- [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb)Airbnb提供的eslint配置
+
 ### 5.1 安装
 ```js
 yarn add @typescript-eslint/parser eslint eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks and eslint-plugin-jsx-a11y eslint-config-airbnb --dev
@@ -711,6 +820,10 @@ package.json
 
 
 ## 6.prettier
+- [prettier](https://www.npmjs.com/package/prettier) 是一个有主见的代码格式化工具
+- [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)关闭和prettier冲突的规则 
+- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier)把Prettier当Eslint规则来运行并且进行报告
+
 ### 6.1 安装依赖
 
 ```js
@@ -773,8 +886,9 @@ components\button\index.tsx
 }
 ```
 
-
 ## 7.editorconfig
+- [EditorConfig](https://github.com/editorconfig/)由用于定义编码样式的文件格式和一组文本编辑器插件组成，这些插件使编辑器能够读取文件格式并遵循定义的样式
+
 ### 7.1 .editorconfig
 ```js
 # top-most EditorConfig file
@@ -789,6 +903,9 @@ indent_size = 2
 ```
 
 ## 8. git hook
+- [Git 钩子](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)能在特定的重要动作发生时触发自定义脚本
+- [husky](https://www.npmjs.com/package/husky)是Git hooks 工具
+
 ### 8.1 安装
 ```js
 yarn add husky --dev
@@ -797,6 +914,8 @@ npm run prepare
 ```
 
 ### 8.2 pre-commit
+- pre-commit在git add提交之后，然后执行git commit时执行，脚本执行没报错就继续提交，反之就驳回提交的操作
+
 ### 8.2.1 安装脚本
 ```js
 npx husky add .husky/pre-commit "npx lint-staged"
@@ -811,6 +930,8 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 
 ### 8.3 commit-msg
+- [validate-commit-msg](https://github.com/conventional-changelog-archived-repos/validate-commit-msg) 用于检查 Node 项目的 Commit message 是否符合格式
+
 ### 8.3.1 安装依赖
 ```js
 yarn add commitizen cz-customizable @commitlint/cli @commitlint/config-conventional --dev
@@ -850,12 +971,17 @@ npm pubish
 ```
 
 ## 9. 编译发布
+- [rimraf](https://www.npmjs.com/package/rimraf)是 node版本的 `rm -rf`
+- [gulp](https://www.gulpjs.com.cn/)将开发流程中让人痛苦或耗时的任务自动化，从而减少你所浪费的时间、创造更大价值。
+- [merge2](https://www.npmjs.com/package/merge2)合并多个流为同一个
+
 ### 9.1 安装依赖
 ```js
 yarn add rimraf gulp gulp-typescript gulp-babel merge2 --dev
 
 npm version patch
 npm publish
+cat ~/.npmrc
 ```
 
 ### 9.2 gulpfile.js
@@ -937,11 +1063,35 @@ package.json
 ```
 
 ## 10. 持续集成
+- [Travis CI](https://www.travis-ci.com/)提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器
+
 ### 10.1 .travis.yml
 ```js
-
-
-
-
-
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+env:
+  - CI=true
+install:
+  - yarn config set registry https://registry.npm.taobao.org  
+  - yarn install
+script:
+  - npm run build-storybook
+  - npm version patch
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: storybook-static
+    on:
+      branch: master 
+  - provider: npm
+    email: zhang_renyang@126.com  
+    api_key: "$NPM_TOKEN"
+    skip_cleanup: true
+    on:
+      branch: master
 ```
