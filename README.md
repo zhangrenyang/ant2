@@ -44,7 +44,7 @@ npm init -y
 ## 2.配置webpack
 ### 2.1 安装依赖
 ```js
-yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/runtime @babel/plugin-transform-typescript  @babel/plugin-transform-runtime @types/node --dev
+yarn add webpack webpack-cli webpack-dev-server mini-css-extract-plugin babel-loader css-loader autoprefixer postcss-loader less-loader less @babel/core @babel/preset-react @babel/preset-env  @babel/runtime @babel/plugin-transform-typescript  typescript @babel/plugin-transform-runtime @types/node --dev
 
 yarn add react react-dom 
 yarn add @types/react @types/react-dom --dev
@@ -642,4 +642,67 @@ package.json
 ```
 
 ## 5.eslint
+### 5.1 安装
+```js
+yarn add @typescript-eslint/parser eslint eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks and eslint-plugin-jsx-a11y eslint-config-airbnb --dev
+```
 
+### 5.2 .eslintrc.js
+.eslintrc.js
+
+```js
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  extends: ['airbnb'],
+  env: {
+    browser: true,
+    node: true,
+    jasmine: true,
+    jest: true,
+    es6: true,
+  },
+  rules: {
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
+    'react/jsx-filename-extension': 0,
+    // https://github.com/typescript-eslint/typescript-eslint/issues/2540#issuecomment-692866111
+    'no-use-before-define': 0,
+    'import/prefer-default-export': 0,
+    'import/no-named-default': 0,
+    'no-console': 0,
+    'no-param-reassign': 0,
+    'func-names': 0,
+  }
+};
+```
+
+### 5.3 .eslintignore
+.eslintignore
+```js
+components/**/e2e/*
+components/**/unit/*
+components/**/*.stories.*
+lib
+es
+umd
+dist
+.storybook
+gulpfile.js
+```
+
+### 5.4 package.json
+package.json
+```diff
+{
+  "scripts": {
+    "build": "webpack",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test:unit": "jest --config unit.jest.js",
+    "test:e2e": "jest --config e2e.jest.js",
+    "test": "npm run test:unit && npm run test:e2e",
++   "lint": "eslint --ext .js,.jsx,.ts,.tsx components",
++   "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx components"
+  }
+}
+```
