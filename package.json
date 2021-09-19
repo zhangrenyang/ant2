@@ -11,7 +11,8 @@
     "test:e2e": "jest --config e2e.jest.js",
     "test": "npm run test:unit && npm run test:e2e",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx components",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx components"
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx components",
+    "prepare": "husky install"
   },
   "publishConfig": {
     "access": "public",
@@ -44,6 +45,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

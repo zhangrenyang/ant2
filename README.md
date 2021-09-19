@@ -785,3 +785,15 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 ```
+
+## 8. git hook
+### 8.1 安装
+```js
+yarn add husky --dev
+npm set-script prepare "husky install"
+```
+
+### 8.2 pre-commit
+```js
+npx husky add .husky/pre-commit "npx lint-staged"
+```
