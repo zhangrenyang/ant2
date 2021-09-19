@@ -904,7 +904,8 @@ indent_size = 2
 
 ## 8. git hook
 - [Git 钩子](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)能在特定的重要动作发生时触发自定义脚本
-- [husky](https://www.npmjs.com/package/husky)是Git hooks 工具
+- [husky](https://www.npmjs.com/package/husky)可以让我们向项目中方便添加 git hooks
+- [lint-staged](https://www.npmjs.com/package/lint-staged)用于实现每次提交只检查本次提交所修改的文件
 
 ### 8.1 安装
 ```js
@@ -915,13 +916,14 @@ npm run prepare
 
 ### 8.2 pre-commit
 - pre-commit在git add提交之后，然后执行git commit时执行，脚本执行没报错就继续提交，反之就驳回提交的操作
+- 可以在 git commit 之前检查代码，保证所有提交到版本库中的代码都是符合规范的
 
-### 8.2.1 安装脚本
+#### 8.2.1 安装脚本
 ```js
 npx husky add .husky/pre-commit "npx lint-staged"
 ```
 
-### 8.2.2 .lintstagedrc
+#### 8.2.2 .lintstagedrc
 ```js
 {
     "*.{js,ts,jsx,tsx}": "eslint"
@@ -931,18 +933,23 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 ### 8.3 commit-msg
 - [validate-commit-msg](https://github.com/conventional-changelog-archived-repos/validate-commit-msg) 用于检查 Node 项目的 Commit message 是否符合格式
+- [commitizen](https://www.npmjs.com/package/commitizen)插件可帮助实现一致的提交消息
+- [cz-customizable](https://www.npmjs.com/package/cz-customizable)可以实现自定义的提交
+- [@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli)可以检查提交信息
+- [@commitlint/config-conventional](https://www.npmjs.com/package/@commitlint/config-conventional)检查您的常规提交
 
-### 8.3.1 安装依赖
+
+#### 8.3.1 安装依赖
 ```js
 yarn add commitizen cz-customizable @commitlint/cli @commitlint/config-conventional --dev
 ```
 
-### 8.3.2 安装脚本
+#### 8.3.2 安装脚本
 ```js
 npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
 ```
 
-### 8.3.3 .cz-config.js
+#### 8.3.3 .cz-config.js
 ```js
 module.exports = {
   types: [
@@ -953,7 +960,7 @@ module.exports = {
 };
 ```
 
-### 8.3.4 commitlint.config.js
+#### 8.3.4 commitlint.config.js
 commitlint.config.js
 ```js
 module.exports = {
@@ -961,9 +968,11 @@ module.exports = {
 };
 ```
 
-
 ### 8.4 pre-push
-### 8.3.1 安装脚本
+- 可以在 git push 之前执行单元测试,保证所有的提交的代码经过的单元测试
+
+#### 8.4.1 安装脚本
+
 ```js
 npx husky add .husky/pre-push "npm run test"
 
