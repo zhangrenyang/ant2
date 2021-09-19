@@ -23,7 +23,7 @@
     "compile": "rimraf es lib && gulp compile",
     "dist": "rimraf dist && webpack",
     "build": "npm run dist && npm run compile",
-    "prepublishOnly": "npm run test && npm run lint && npm run build"
+    "prepublishOnly": "npm run test && npm run lint && npm version patch && npm run build"
   },
   "publishConfig": {
     "access": "public",
