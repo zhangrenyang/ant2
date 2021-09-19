@@ -846,5 +846,14 @@ module.exports = {
 ### 8.3.1 安装脚本
 ```js
 npx husky add .husky/pre-push "npm run test"
+
+npm pubish
 ```
+
+## 9. 编译
+### 9.1 安装依赖
+```js
+yarn add rimraf gulp gulp-typescript gulp-babel merge2 --dev
+```
+
 
