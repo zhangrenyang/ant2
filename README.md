@@ -297,8 +297,11 @@ module.exports = require('./components');
 ### 2.7 components\index.tsx
 components\index.tsx
 ```js
+import Button from './button';
+
 export type { ButtonProps } from './button';
-export  {Button} from './button';
+export default Button;
+
 ```
 
 ### 2.8 button\index.tsx
@@ -795,6 +798,45 @@ npm run prepare
 ```
 
 ### 8.2 pre-commit
+### 8.2.1 安装脚本
 ```js
 npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+### 8.2.2 .lintstagedrc
+```js
+{
+    "*.{js,ts,jsx,tsx}": "eslint"
+}
+```
+
+
+### 8.3 commit-msg
+### 8.3.1 安装依赖
+```js
+yarn add commitizen cz-customizable @commitlint/cli @commitlint/config-conventional --dev
+```
+
+### 8.3.2 安装脚本
+```js
+npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+```
+
+### 8.3.3 .cz-config.js
+```js
+module.exports = {
+  types: [
+    { value: "feature", name: "feature:一个新特性" },
+    { value: "bugfix", name: "bugfix:修复BUG" },
+  ],
+  scopes: [{ name: "admin" }, { name: "user" }],
+};
+```
+
+### 8.3.4 commitlint.config.js
+commitlint.config.js
+```js
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+};
 ```
