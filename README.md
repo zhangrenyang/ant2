@@ -826,8 +826,8 @@ npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
 ```js
 module.exports = {
   types: [
-    { value: "feature", name: "feature:一个新特性" },
-    { value: "bugfix", name: "bugfix:修复BUG" },
+    { value: "feat", name: "feat:一个新特性" },
+    { value: "fix", name: "fix:修复BUG" },
   ],
   scopes: [{ name: "admin" }, { name: "user" }],
 };
@@ -840,3 +840,11 @@ module.exports = {
   extends: ['@commitlint/config-conventional'],
 };
 ```
+
+
+### 8.4 pre-push
+### 8.3.1 安装脚本
+```js
+npx husky add .husky/pre-push "npm run test"
+```
+

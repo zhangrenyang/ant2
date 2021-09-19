@@ -1,7 +1,7 @@
 module.exports = {
   types: [
-    { value: "feature", name: "feature:一个新特性" },
-    { value: "bugfix", name: "bugfix:修复BUG" },
+    { value: "feat", name: "feat:一个新特性" },
+    { value: "fix", name: "fix:修复BUG" },
   ],
   scopes: [{ name: "admin" }, { name: "user" }],
 };
