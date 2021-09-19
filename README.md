@@ -791,6 +791,7 @@ indent_size = 2
 ```js
 yarn add husky --dev
 npm set-script prepare "husky install"
+npm run prepare
 ```
 
 ### 8.2 pre-commit
