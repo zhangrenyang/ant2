@@ -770,3 +770,18 @@ components\button\index.tsx
   "files.autoSave": "afterDelay"
 }
 ```
+
+
+## 7.editorconfig
+### 7.1 .editorconfig
+```js
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*.{js,css}]
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+```
